@@ -26,7 +26,7 @@ loss_train = []
 # make iterations(using mini-batch gradient descent)
 def svm(epochs, lr, batch_size, c):
     # initialize parameter w
-    w = np.random.normal(2, 2, size=(123, 1))
+    w = np.random.normal(size=(123, 1))
     for epoch in range(epochs):
         for i in range(X_train.shape[0] // batch_size):
             # randomly pick samples
@@ -68,7 +68,7 @@ def svm(epochs, lr, batch_size, c):
 
 
 def plot():
-    plt.figure(figsize=[15, 8])
+    plt.figure(figsize=[9, 5])
     plt.title('SVM-Validation Set Loss')
     plt.xlabel('epoch')
     plt.ylabel('loss')
@@ -79,4 +79,4 @@ def plot():
     plt.show()
 
 
-svm(200, 0.0001, 32, 0.5)
+svm(200, 0.0003, 32, 0.05)

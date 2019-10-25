@@ -32,7 +32,7 @@ loss_train = []
 # make iterations, using mini-batch stochastic gradient descent
 def logisticregression(epochs, lr, batch_size):
     # initialize parameter w
-    w = np.random.normal(1, 1, size=(123, 1))
+    w = np.random.normal(size=(123, 1))
     for epoch in range(epochs):
         for i in range(X_train.shape[0] // batch_size):
             # randomly pick samples
@@ -55,6 +55,9 @@ def logisticregression(epochs, lr, batch_size):
         output_val[SigmoidFunction(output_val) > 0.5] = 1
         output_val[SigmoidFunction(output_val) <= 0.5] = 0
 
+        output_train[SigmoidFunction(output_train) > 0.5] = 1
+        output_train[SigmoidFunction(output_train) <= 0.5] = 0
+
         print('EPOCHS:{}'.format(epoch))
         print('loss_val is:{}'.format(loss_val[-1]))
         print('loss_train is:{}'.format(loss_train[-1]))
@@ -63,7 +66,7 @@ def logisticregression(epochs, lr, batch_size):
 
 
 def plot():
-    plt.figure(figsize=[15, 5])
+    plt.figure(figsize=[9, 5])
     plt.title('LR-Validation Set Loss')
     plt.xlabel('epoch')
     plt.ylabel('loss')
@@ -74,4 +77,4 @@ def plot():
     plt.show()
 
 
-logisticregression(200, 0.0001, 32)
+logisticregression(200, 0.0008, 32)
