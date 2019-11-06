@@ -14,9 +14,9 @@ Y_val = Y_val.reshape(Y_val.shape[0], 1)
 
 
 # Hinge Loss Function
-def HingeLoss(y_, y, C):
+def HingeLoss(w, y_, y, C):
     loss = np.maximum(0, (1-y*y_))
-    return C*loss.sum() / y.shape[0]
+    return 0.5 * (np.linalg.norm(w, ord=2)**2) + C*loss.sum() / y.shape[0]
 
 # initialize
 loss_val = []
@@ -50,8 +50,8 @@ def svm(epochs, lr, batch_size, c):
         # evaluate the loss on the validation set
         output_val = X_val.dot(w)
         output_train = X_train.dot(w)
-        loss_val.append(HingeLoss(output_val, Y_val, 0.5))
-        loss_train.append(HingeLoss(output_train, Y_train, 0.5))
+        loss_val.append(HingeLoss(w, output_val, Y_val, 0.5))
+        loss_train.append(HingeLoss(w, output_train, Y_train, 0.5))
 
         # mark the positive class and the negative class(SVM)
         output_val[output_val > 0] = 1
@@ -79,4 +79,4 @@ def plot():
     plt.show()
 
 
-svm(200, 0.0003, 32, 0.05)
+svm(200, 0.0003 , 32, 0.05)
