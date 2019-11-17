@@ -37,7 +37,7 @@ def train_and_validation(train_data_path, validation_data_path):
     # set parameters
     k = 150
     LR = 0.0002 # learning rate
-    epochs = 50 # iterations time
+    epochs = 50  # iterations time
     penalty_factor = 100
 
     # initialize users matrix P and goods matrix Q and the loss
@@ -57,9 +57,9 @@ def train_and_validation(train_data_path, validation_data_path):
                                      penalty_factor * P[user])
                     Q[item] += LR * (P[user] * (train_data_path[user][item] - np.dot(P[user], Q[item])) -
                                      penalty_factor * Q[item])
-        # calculate the loss value each iteration
-        loss = np.sum(np.power(validation_data_path - np.dot(P, Q.transpose()), 2)) / (users * items)
-        + penalty_factor * (np.sum(np.power(P, 2)) + np.sum(np.power(Q.transpose(), 2))) / k
+
+        loss = np.sum(np.power(validation_data_path - np.dot(P, Q.transpose()), 2))
+        + penalty_factor * (np.sum(np.power(P, 2)) + np.sum(np.power(Q.transpose(), 2)))
         Loss.append(loss)
 
     # final rating matrix
